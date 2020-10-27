@@ -52,3 +52,18 @@ input{
   margin: 5px 0px 15px;
   text-align: center;
 }
+div{
+  display: flex;
+  flex-direction: column;
+}
+.remove{
+  position: absolute;
+  border-radius: 50%;
+  min-width: fit-content;
+  width: 80px;
+  height: 80px;
+  margin: -20px 500px;
+}
+nav, footer{
+  font-size: 26px;
+}

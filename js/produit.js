@@ -11,6 +11,7 @@ fetch(`http://localhost:3000/api/cameras/${new URLSearchParams(window.location.s
     }
   })
   .then((data) => {
+    document.getElementById("title").innerHTML = `Orinoco - ${data.name}`;
     let lens;
     let priceInEuro = (data.price / 100).toFixed(2);
     function addToLocalStorage() {

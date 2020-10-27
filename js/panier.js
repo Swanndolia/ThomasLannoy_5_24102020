@@ -1,13 +1,15 @@
 const mainHtml = document.getElementById("main");
 function removeProduct(_id) {
-    localStorage.removeItem(_id);
-    document.location.href = "panier.html";
-  }
+  localStorage.removeItem(_id);
+  document.location.href = "panier.html";
+}
 for (let i = 0; i < localStorage.length; i++) {
   let productsOfCart = localStorage.key(i);
   let data = JSON.parse(localStorage.getItem(productsOfCart));
   mainHtml.innerHTML += `
-    <a href="produit.html?id=${data._id}">        
+  <div>   
+    <button class="remove" onclick="removeProduct('${data.id}')">Retirer</button> 
+    <a href="produit.html?id=${data._id}">     
       <figure>
         <img alt="${data.name}" src="${data.preview}">
         <figcaption>
@@ -18,7 +20,7 @@ for (let i = 0; i < localStorage.length; i++) {
         </figcaption>
       </figure>
     </a>
-    <button onclick="removeProduct('${data.id}')">Retirer</button> 
+  </div>
   `;
 }
 if (!localStorage.length) {
