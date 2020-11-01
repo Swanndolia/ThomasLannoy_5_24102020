@@ -1,5 +1,4 @@
 const docHtml = document.getElementById("main");
-
 fetch("http://localhost:3000/api/cameras")
   .then((response) => {
     if (response.ok) {
@@ -7,7 +6,7 @@ fetch("http://localhost:3000/api/cameras")
       return response.json();
     } else {
       Promise.reject(response.status);
-      console.log("erreur : " + response.status)
+      console.error("erreur : " + response.status)
     }
   })
   .then((data) => {

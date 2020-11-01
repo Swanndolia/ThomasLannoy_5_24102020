@@ -1,5 +1,4 @@
 const docHtml = document.getElementById("main");
-
 fetch(`http://localhost:3000/api/cameras/${new URLSearchParams(window.location.search).get("id")}`)
   .then((response) => {
     if (response.ok) {
