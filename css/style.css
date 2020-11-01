@@ -1,6 +1,7 @@
 a {
   text-decoration: none;
   color: inherit;
+  margin: 40px;
 }
 body{
   background-color: #893a8b;
@@ -21,6 +22,7 @@ main {
   flex-wrap: wrap;
 }
 figure {
+  margin: 0px;
   width: 520px;
   padding: 10px 0px;
   background-color: #b17140;
