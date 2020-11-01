@@ -24,7 +24,7 @@ fetch(`http://localhost:3000/api/cameras/${new URLSearchParams(window.location.s
         priceForAll: (priceInEuro * productQuantity.value).toFixed(2),
         pricePerUnit: priceInEuro,
       };
-      localStorage[data._id] = JSON.stringify(productDetails);
+      localStorage[productDetails.lensType] = JSON.stringify(productDetails);
       window.location.href = "panier.html";
     }
     data.lenses.forEach((lentille) => {

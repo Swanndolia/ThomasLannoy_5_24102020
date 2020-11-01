@@ -1,0 +1,1 @@
+document.getElementById("main").innerHTML += ` <h2> Merci pour votre commande d'un montant de: ${sessionStorage.getItem("orderTotalPrice")}€ </h2> `;
