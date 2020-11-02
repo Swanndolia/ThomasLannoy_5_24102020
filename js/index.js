@@ -1,11 +1,10 @@
 const docHtml = document.getElementById("main");
 fetch("http://localhost:3000/api/cameras")
   .then((response) => {
-    if (response.ok) {
+    if (response.ok)
       return response.json();
-    } else {
+    else
       Promise.reject(response.status);
-    }
   })
   .then((data) => {
     data.forEach((objet) => {

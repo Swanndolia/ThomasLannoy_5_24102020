@@ -39,42 +39,38 @@ if (document.getElementById("btn-order")) {
     let lastName = document.getElementById("last-name").value;
     let address = document.getElementById("address").value;
     let city = document.getElementById("city").value;
-    let mail = document.getElementById("mail").value;
-    if (/[0-9]/.test(firstName) || /[§!@#$%^&*().?":{}|<>]/.test(firstName) || !firstName) {
+    let email = document.getElementById("mail").value;
+    if (/[0-9]/.test(firstName) || /[§!@#$%^&*().?":{}|<>]/.test(firstName) || !firstName)
       formIsInvalid += "Votre prénom est invalide \n";
-    }
-    if (/[0-9]/.test(lastName) || /[§!@#$%^&*().?":{}|<>]/.test(lastName) || !lastName) {
+    if (/[0-9]/.test(lastName) || /[§!@#$%^&*().?":{}|<>]/.test(lastName) || !lastName)
       formIsInvalid += "Votre nom de famille est invalide \n";
-    }
-    if (!address) {
+    if (!address)
       formIsInvalid += "Votre adresse est invalide \n";
-    }
-    if (/[0-9]/.test(city) || !city) {
+    if (/[0-9]/.test(city) || !city)
       formIsInvalid += "Votre ville est invalide \n";
-    }
-    if (!/@/.test(mail) || !mail) {
+    if (!/@/.test(email) || !email)
       formIsInvalid += "Votre mail est invalide \n";
-    }
-    if (formIsInvalid) {
+    if (formIsInvalid)
       alert("Erreur : \n" + formIsInvalid);
-    } else {
+    else {
       let contact = {
         lastName: lastName,
         firstName: firstName,
         address: address,
         city: city,
-        mail: mail,
+        email: email,
       };
-      const toSend = { contact, products }
-      console.log(toSend);
-      fetch("http://localhost:3000/api/cameras/order", { method: "post", body: toSend })
+      let toSend = { contact, products };
+      toSend = JSON.stringify(toSend);
+      fetch("http://localhost:3000/api/cameras/order", { method: "post", headers: { "Content-Type": "application/json" }, body: toSend })
         .then(function (response) {
           if (response.ok) {
-            window.location.href("confirm.html");
-            return response.json();
-          } else {
+            response.json().then(function(responseData) {
+              sessionStorage.setItem("orderId", responseData.orderId);
+            });
+            window.location.href = "confirm.html"
+          } else
             Promise.reject(response.status);
-          }
         })
         .catch(function (error) {
           console.log(error);
