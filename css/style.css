@@ -4,13 +4,13 @@ a {
   margin: 40px;
 }
 body{
-  background-color: #893a8b;
+  background-color: #e2e2e2;
 }
 header {
   padding: 20px;
   margin: 20px 190px;
   display: flex;
-  background-color: #b17140;
+  background-color: #e2e2e2;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
@@ -25,7 +25,7 @@ figure {
   margin: 0px;
   width: 520px;
   padding: 10px 0px;
-  background-color: #b17140;
+  background-color: #f2f2f2;
   text-align: center;
   border-radius: 50px;
 }
@@ -36,7 +36,7 @@ img:not(.logo) {
 footer{
   margin: 20px 190px;
   padding: 20px;
-  background-color: #b17140;
+  background-color: #e2e2e2;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -59,12 +59,13 @@ div{
   flex-direction: column;
 }
 .remove{
+  background-color: #f2f2f2;
   position: absolute;
   border-radius: 50%;
   min-width: fit-content;
   width: 80px;
   height: 80px;
-  margin: -20px 500px;
+  margin: 0px 500px;
 }
 nav, footer{
   font-size: 26px;
