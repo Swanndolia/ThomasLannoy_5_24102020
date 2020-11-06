@@ -1,10 +1,12 @@
 const mainHtml = document.getElementById("main");
 let totalPrice = 0;
 const products = [];
+/* focntion retairer produit panier */
 function removeProduct(lensType) {
   localStorage.removeItem(lensType);
   document.location.href = "panier.html";
 }
+/* pour chaque article dans le panier, l'afficher */
 for (let i = 0; i < localStorage.length; i++) {
   let data = JSON.parse(localStorage.getItem(localStorage.key(i)));
   products.push(data.id);
@@ -28,10 +30,12 @@ for (let i = 0; i < localStorage.length; i++) {
   `;
 }
 document.getElementById("order");
+/* si panier vide ne pas afficher le formulaire */
 if (!localStorage.length) {
   mainHtml.innerHTML = `<h2>Votre panier est vide :'( </h2>`;
   document.getElementById("form").remove();
 }
+/* si panier non vide et donc btn-order affiché event listener au click pourt passer les informations au serveur avec vérification de validité par regex */
 if (document.getElementById("btn-order")) {
   document.getElementById("btn-order").addEventListener("click", function () {
     let formIsInvalid = "";
@@ -64,6 +68,7 @@ if (document.getElementById("btn-order")) {
       toSend = JSON.stringify(toSend);
       fetch("http://localhost:3000/api/cameras/order", { method: "post", headers: { "Content-Type": "application/json" }, body: toSend })
         .then(function (response) {
+          /* Si connection ok ajout orderId au local storage */
           if (response.ok) {
             response.json().then(function(responseData) {
               sessionStorage.setItem("orderId", responseData.orderId);
@@ -72,6 +77,7 @@ if (document.getElementById("btn-order")) {
           } else
             Promise.reject(response.status);
         })
+        /* Sinon log les erreurs dans la console */
         .catch(function (error) {
           console.log(error);
         });

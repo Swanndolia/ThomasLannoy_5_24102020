@@ -1,15 +1,18 @@
 const docHtml = document.getElementById("main");
 fetch(`http://localhost:3000/api/cameras/${new URLSearchParams(window.location.search).get("id")}`)
   .then((response) => {
+    /* Vérification connection serveur */
     if (response.ok)
       return response.json();
     else
       Promise.reject(response.status);
   })
   .then((data) => {
+    /* titre page = nom produit */
     document.getElementById("title").innerHTML = `Orinoco - ${data.name}`;
     let lens;
     let priceInEuro = (data.price / 100).toFixed(2);
+    /* Fonction ajout au local storage */
     function addToLocalStorage() {
       let productQuantity = document.getElementById("quantity");
       let productDetails = {
@@ -24,9 +27,11 @@ fetch(`http://localhost:3000/api/cameras/${new URLSearchParams(window.location.s
       localStorage[productDetails.lensType] = JSON.stringify(productDetails);
       window.location.href = "panier.html";
     }
+    /* liste les différentes lentilles */
     data.lenses.forEach((lentille) => {
       lens += `<option value="${lentille}">${lentille}</option>`;
     });
+    /* Ajout dans le html le produit selectionné et les informations relatives */
     docHtml.innerHTML += `
     <figure>
       <img alt="${data.name}" src="${data.imageUrl}">
@@ -46,6 +51,7 @@ fetch(`http://localhost:3000/api/cameras/${new URLSearchParams(window.location.s
       </figcaption>
     </figure>
     `;
+    /* events listeners */
     document.getElementById("quantity").addEventListener("change", (event) => {
       document.getElementById("priceForAll").textContent = `${(priceInEuro * event.target.value).toFixed(2)}`;
     });

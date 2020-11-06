@@ -1,11 +1,13 @@
 const docHtml = document.getElementById("main");
 fetch("http://localhost:3000/api/cameras")
   .then((response) => {
+    /* Vérification connection serveur */
     if (response.ok)
       return response.json();
     else
       Promise.reject(response.status);
   })
+  /* Si connection ok pour chaque produit l'afficher */
   .then((data) => {
     data.forEach((objet) => {
       let priceInEuro = objet.price / 100;
@@ -22,6 +24,7 @@ fetch("http://localhost:3000/api/cameras")
       `;
     });
   })
+  /* Sinon log les erreurs dans la console */
   .catch(function(error) {
     console.log(error);
 });
